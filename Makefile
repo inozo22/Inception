@@ -1,12 +1,25 @@
-NGINX_IMAGE = nginx-custom
-WORDPRESS_IMAGE = wordpress-custom
-MARIADB_IMAGE = mariadb-custom
+include ./srcs/.env
+all: run
 
-all:
-    docker-compose -f srcs/docker-compose.yml up -d --build
+run:
+	@sudo mkdir -p $(VOLUME_WEB)
+	@sudo mkdir -p $(VOLUME_DB)
+	@docker-compose -f $(COMPOSE_FILE) up
 
 down:
-    docker-compose down
+	@docker-compose -f $(COMPOSE_FILE) down
 
-.PHONY: all down
+clean:
+	@docker-compose -f $(COMPOSE_FILE) down
+	@-docker network rm `docker network ls -q`
+	@-docker rm `docker ps -qa`
+	@-docker rmi -f `docker images -qa`
+	@-docker volume rm `docker volume ls -q`
+	@-docker network rm `docker network ls -q`
+	@sudo rm -rf /home/syamashi
+	@docker volume prune -f
+	@-docker system prune -f
+	@echo "clean finished"
+
+.PHONY: all run down clean
 .SILENT:
