@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    restart: always
+    networks:
+      - my-network
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile.wordpress
+    restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - my-network
+    volumes:
+      - wordpress-data:/var/www/html
+      - wordpress-db:/var/lib/mysql
+
+  mariadb:
+    build:
+      context: .
+      dockerfile: Dockerfile.mariadb
+    restart: always
+    networks:
+      - my-network
+    environment:
+      MYSQL_ROOT_PASSWORD: example_root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: example_password
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  wordpress-data:
+  wordpress-db:
