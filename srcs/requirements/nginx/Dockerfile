@@ -5,10 +5,13 @@ RUN apk update && apk upgrade && apk add --no-cache nginx openssl
 
 
 # Expose the necessary ports
-EXPOSE 80
-EXPOSE 443
+#EXPOSE 80
+#EXPOSE 443
 
 # open ssl certificate
+# create the SSL directory
+RUN mkdir /etc/nginx/ssl
+# generate SSL key and certificate
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
     -out /etc/nginx/ssl/inception.crt \
     -keyout /etc/nginx/ssl/inception.key \
@@ -16,7 +19,7 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 
 
 
-
+# nginx
 RUN mkdir -p /run/nginx
 # Your NGINX configurations with TLSv1.2 or TLSv1.3
 # COPY nginx.conf /etc/nginx/nginx.conf
