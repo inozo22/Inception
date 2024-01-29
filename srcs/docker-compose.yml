@@ -4,10 +4,12 @@ services:
   nginx:
     image: ngnix
     container_name: nginx
-    build: ./requirements/nginx
+    build: ./requirements/nginx #where is my docker file
     ports:
       - 443:443
     restart: always
+    env_file:
+      - .env
     networks:
       - network
 
