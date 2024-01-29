@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   nginx:
+    image: ngnix
     container_name: nginx
     build: ./requirements/nginx
     ports:
