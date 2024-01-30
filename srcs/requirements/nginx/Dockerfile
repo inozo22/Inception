@@ -15,7 +15,7 @@ RUN mkdir /etc/nginx/ssl
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
     -out /etc/nginx/ssl/inception.crt \
     -keyout /etc/nginx/ssl/inception.key \
-    -subj "/C=JP/ST=urduliz/L=city/0=42urduliz/CN=nimai.42.fr"
+    -subj "/C=ES/ST=urduliz/L=city/0=42urduliz/CN=nimai.42.fr"
 
 
 

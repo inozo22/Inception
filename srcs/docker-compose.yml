@@ -13,32 +13,32 @@ services:
     networks:
       - my-network
 
-  # wordpress:
-  #   container_name: wordpress
-  #   build:
-  #     context: ./requirements/wordpress
-  #     dockerfile: Dockerfile.wordpress
-  #   restart: always
-  #   depends_on:
-  #     - mariadb
-  #   networks:
-  #     - my-network
-  #   volumes:
-  #     - wordpress-data:/var/www/html
-  #     - wordpress-db:/var/lib/mysql
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile.wordpress
+    restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - my-network
+    volumes:
+      - wordpress-data:/var/www/html
+      - wordpress-db:/var/lib/mysql
 
-  # mariadb:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.mariadb
-  #   restart: always
-  #   networks:
-  #     - my-network
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: example_root_password
-  #     MYSQL_DATABASE: wordpress
-  #     MYSQL_USER: wordpress_user
-  #     MYSQL_PASSWORD: example_password
+  mariadb:
+    build:
+      context: .
+      dockerfile: Dockerfile.mariadb
+    restart: always
+    networks:
+      - my-network
+    environment:
+      MYSQL_ROOT_PASSWORD: example_root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: example_password
 
 networks:
   my-network:
