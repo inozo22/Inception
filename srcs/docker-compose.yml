@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3'
 
 services:
   nginx:
@@ -51,7 +51,6 @@ services:
 
 networks:
   my-network:
-    driver: bridge
 
 volumes:
   db:
