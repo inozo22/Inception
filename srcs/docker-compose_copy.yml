@@ -2,16 +2,11 @@ version: '3.9'
 
 services:
   nginx:
-    image: ngnix:nimai
+    image: ngnix
     container_name: nginx
-    build:
-      context: ./requirements/nginx #where is my docker file
-    depends_on:
-      - wordpress
-    volumes:
-      - web:/var/www/html
+    build: ./requirements/nginx #where is my docker file
     ports:
-      - "443:443"
+      - 443:443
     restart: always
     env_file:
       - .env
@@ -19,7 +14,7 @@ services:
       - my-network
 
   wordpress:
-    image: wordpress:nimai
+    image: wordpress
     build:
       context: ./requirements/wordpress
 #    restart: always
@@ -34,24 +29,22 @@ services:
       - web:/var/www/html
 
   mariadb:
-    image: mariadb:nimai
+    image: mariadb
     build:
       context: ./requirements/mariadb
     container_name: mariadb
     volumes:
       - db:/var/lib/mysql
+    restart: always
     networks:
       - my-network
-    restart: always
     env_file:
       - .env
 
 
-
-
 networks:
   my-network:
-    driver: bridge
+
 
 volumes:
   db:
