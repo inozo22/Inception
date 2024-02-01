@@ -26,9 +26,9 @@ RUN chmod +x /usr/local/bin/setup.sh
 
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
-ENTRYPOINT ["setup.sh"]
+ENTRYPOINT [ "setup.sh" ]
 
 # Healthcheck to ensure MariaDB is running
-HEALTHCHECK CMD ["/usr/bin/mysqld", "--user=mysql", "--console"]
+CMD [ "/usr/bin/mysqld", "--user=mysql", "--console" ]
 
 

@@ -2,21 +2,21 @@ version: '3'
 
 services:
   nginx:
-    image: ngnix:nimai
+    image: nginx:nimai
     container_name: nginx
     build:
       context: ./requirements/nginx #where is my docker file
     depends_on:
       - wordpress
     volumes:
-      - web:/var/www/html
+      - .${VOLUME_WEB}:/var/www/html
     ports:
       - "443:443"
     restart: always
     env_file:
       - .env
     networks:
-      - my-network
+      - inception-network
 
   wordpress:
     image: wordpress:nimai
@@ -27,39 +27,57 @@ services:
     depends_on:
       - mariadb
     networks:
-      - my-network
+      - inception-network
     env_file:
       - .env
     volumes:
-      - web:/var/www/html
+      - .${VOLUME_WEB}:/var/www/html/
 
   mariadb:
     image: mariadb:nimai
+
     build:
       context: ./requirements/mariadb
     container_name: mariadb
     volumes:
-      - db:/var/lib/mysql
+      - .${VOLUME_DB}:/var/lib/mysql
     networks:
-      - my-network
+      - inception-network
     restart: always
     env_file:
       - .env
+
+#  adminer:
+#    image: adminer:nimai
+#    build:
+#      context: ./requirements/bonus/adminer
+#    container_name: adminer
+#    restart: always
+#    depends_on:
+#      - mariadb
+#      - wordpress
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - inception-network
 
 
 
 
 networks:
-  my-network:
+  inception-network:
+      driver: bridge
 
 volumes:
   db:
+    driver: local
     driver_opts:
-      type: local
+      type: volume
       device: ${VOLUME_DB}
       o: bind
   web:
+    driver: local
     driver_opts:
-      type: local
+      type: volume
       device: ${VOLUME_WEB}
       o: bind

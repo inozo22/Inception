@@ -30,6 +30,8 @@ RUN apk update && apk upgrade && apk add --no-cache php8 php8-fpm \
 
 # Copy the www.conf file /etc/php8/php-fpm.d
 
+
+
 COPY ./conf/php-fpm.conf /etc/php8/php-fpm.conf
 COPY ./conf/www.conf /etc/php8/php-fpm.d/www.conf
 
@@ -52,7 +54,7 @@ COPY ./tools/wordpress-6.2.tar.gz /tmp/
 COPY ./tools/index.html /tmp/
 RUN chmod -R 777 /tmp/
 
-ENTRYPOINT ["setup.sh"]
+ENTRYPOINT [ "setup.sh" ]
 
 
 # Launch php-fpm
@@ -63,4 +65,4 @@ ENTRYPOINT ["setup.sh"]
 # COPY php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Healthcheck to ensure php-fpm is running
-HEALTHCHECK CMD ["php-fpm8", "--nodaemonize"]
+CMD [ "php-fpm8", "--nodaemonize" ]

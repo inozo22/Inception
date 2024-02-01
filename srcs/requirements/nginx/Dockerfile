@@ -28,7 +28,7 @@ COPY ./conf/default.conf /etc/nginx/http.d/default.conf
 
 
 # Healthcheck to ensure NGINX is running
-HEALTHCHECK CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 
 
 # FROM  - defines a base for your image. exemple : FROM debian
