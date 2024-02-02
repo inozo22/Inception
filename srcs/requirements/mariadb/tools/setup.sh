@@ -38,7 +38,6 @@ EOF
 	/usr/bin/mysqld --user=mysql --bootstrap < $tfile
   rm -f $tfile
 fi
-
-echo "[i] => Done mysql setting!"
+ 
 
 exec "$@"
