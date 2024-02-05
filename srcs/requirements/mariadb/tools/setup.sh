@@ -1,17 +1,25 @@
 #!/bin/sh
 
+# If the directory "/run/mysql" exists. If not, 
+# it creates the directory and sets ownership to the mysql user.
 if [ ! -d "/run/mysql" ]; then
-	"[i] /run/mysqld creating..."
+	echo "[i] /run/mysqld creating..."
 	mkdir -p /run/mysqld
 fi
 chown -R mysql:mysql /run/mysqld
 
+# If the MySQL database directory "/var/lib/mysql/mysql" exists. 
+# If not, it initializes the MySQL database, sets ownership, 
+# and performs some initial configurations.
 if [ ! -d /var/lib/mysql/mysql ]; then
 	echo "[i] initial database creating..."
 	chown -R mysql:mysql /var/lib/mysql
 	chown -R mysql /var/lib/mysql
 	mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql --rpm > /dev/null
 
+# Generates a temporary file with MySQL queries and executes them using mysqld. 
+# The queries include setting up the root user and privileges, 
+# creating a database, and creating a user for a WordPress database.
   tfile=""
   while [ ! -f "$tfile" ]; do
     tfile=$(mktemp)
@@ -39,5 +47,7 @@ EOF
   rm -f $tfile
 fi
  
-
+# executes the command specified when running the script, 
+# passing along any command-line arguments. 
+# This is often used to start the main process of the Docker container.
 exec "$@"

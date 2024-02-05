@@ -1,14 +1,21 @@
 #!/bin/sh
 
 # wait until database is ready
+# This loop waits for the MariaDB database to become available by attempting to connect to it using mariadb command. 
+# It waits for 10 seconds between each attempt.
 while ! mariadb -h$MYSQL_HOST -u$WP_DB_USER -p$WP_DB_PASSWORD $WP_DB_NAME --silent; do
 	echo "[i] waiting database connection..."
 	sleep 10;
 done
+echo "after waiting mariadb: Am I??"
 
 # check if wordpress is installed
+# If WordPress is already installed by looking for the presence of a file ($WP_FILE_ONINSTALL). 
+# If not, it proceeds to download and install WordPress using wp-cli. 
+# It then creates a configuration, installs WordPress, creates an admin user, updates plugins, and moves files around. 
+# Finally, it touches the file indicating that WordPress has been installed.
 if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
-	echo "[i] wordpress installing..."
+	echo "[i] wordpress installing...[1]"
 
 	# wp-cli
   # wp core download --allow-root
@@ -24,7 +31,7 @@ if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
     --dbcharset="utf8" \
     --dbcollate="utf8_general_ci" \
     --allow-root
-  echo "[i] wordpress installing..."
+  echo "[i] wordpress installing...[2]"
 	wp core install \
     --url=$DOMAIN_NAME \
     --title=$WP_TITLE \
@@ -47,8 +54,8 @@ if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
 	touch /var/www/html/$WP_FILE_ONINSTALL
 fi
 
-#mkdir -p /var/run/php-fpm7
-mkdir -p /var/run/php-fpm8
+mkdir -p /var/run/php-fpm7
+#mkdir -p /var/run/php-fpm8
 echo "[i] => Done wordpress setup!"
 
 exec "$@"

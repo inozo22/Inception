@@ -9,7 +9,8 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - .${VOLUME_WEB}:/var/www/html
+      - ${VOLUME_WEB}:/var/www/html
+#      - web:/var/www/html
     ports:
       - "443:443"
     restart: always
@@ -31,7 +32,8 @@ services:
     env_file:
       - .env
     volumes:
-      - .${VOLUME_WEB}:/var/www/html/
+      - ${VOLUME_WEB}:/var/www/html/
+#      - web:/var/www/html/
 
   mariadb:
     image: mariadb:nimai
@@ -40,7 +42,8 @@ services:
       context: ./requirements/mariadb
     container_name: mariadb
     volumes:
-      - .${VOLUME_DB}:/var/lib/mysql
+      - ${VOLUME_DB}:/var/lib/mysql
+#      - db:/var/lib/mysql
     networks:
       - inception-network
     restart: always
