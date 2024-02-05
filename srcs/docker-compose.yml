@@ -37,7 +37,6 @@ services:
 
   mariadb:
     image: mariadb:nimai
-
     build:
       context: ./requirements/mariadb
     container_name: mariadb
