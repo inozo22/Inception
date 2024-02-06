@@ -4,6 +4,7 @@ all: run
 run:
 	@sudo mkdir -p $(VOLUME_WEB)
 	@sudo mkdir -p $(VOLUME_DB)
+#	@docker-compose -f $(COMPOSE_FILE) up -d --build
 	@docker-compose -f $(COMPOSE_FILE) up
 	@echo "I have done up"
 

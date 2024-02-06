@@ -10,7 +10,6 @@ services:
       - wordpress
     volumes:
       - ${VOLUME_WEB}:/var/www/html
-#      - web:/var/www/html
     ports:
       - "443:443"
     restart: always
@@ -31,9 +30,10 @@ services:
       - inception-network
     env_file:
       - .env
+    expose:
+      - 9000
     volumes:
       - ${VOLUME_WEB}:/var/www/html/
-#      - web:/var/www/html/
 
   mariadb:
     image: mariadb:nimai
@@ -42,10 +42,11 @@ services:
     container_name: mariadb
     volumes:
       - ${VOLUME_DB}:/var/lib/mysql
-#      - db:/var/lib/mysql
     networks:
       - inception-network
     restart: always
+    expose:
+      - 3306
     env_file:
       - .env
 

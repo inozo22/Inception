@@ -58,4 +58,6 @@ mkdir -p /var/run/php-fpm7
 #mkdir -p /var/run/php-fpm8
 echo "[i] => Done wordpress setup!"
 
+#The script ends with exec "$@", which allows the script to execute any command-line
+# arguments provided when running the script.
 exec "$@"
