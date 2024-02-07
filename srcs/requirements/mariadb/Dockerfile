@@ -3,8 +3,10 @@ FROM alpine:3.16
 # WHAT I HAVE TO DO ######
 # Download mariadb-server && mariadb-client
 
-RUN apk update && apk upgrade && apk add --no-cache mariadb \
-    mariadb-client mariadb-common && rm -rf /var/cache/apk/*
+RUN apk update && apk upgrade 
+RUN apk add --no-cache mariadb \
+    mariadb-client mariadb-common 
+RUN rm -rf /var/cache/apk/*
 
 # To run mariaDB on your container, you have to copy your .sh and the .sql on the /var/local/bin/
 

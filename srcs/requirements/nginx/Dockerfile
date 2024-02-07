@@ -1,7 +1,8 @@
 FROM alpine:3.16
 
 # apk
-RUN apk update && apk upgrade && apk add --no-cache nginx openssl
+RUN apk update && apk upgrade 
+RUN apk add --no-cache nginx openssl
 
 
 # Expose the necessary ports
