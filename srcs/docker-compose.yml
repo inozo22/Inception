@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    image: nginx:nimai
+    image: nginx:nimai_incpetion
     container_name: nginx
     build:
       context: ./requirements/nginx #where is my docker file
@@ -19,7 +19,7 @@ services:
       - inception-network
 
   wordpress:
-    image: wordpress:nimai
+    image: wordpress:nimai_incpetion
     build:
       context: ./requirements/wordpress
 #    restart: always
@@ -36,7 +36,7 @@ services:
       - ${VOLUME_WEB}:/var/www/html/
 
   mariadb:
-    image: mariadb:nimai
+    image: mariadb:nimai_incpetion
     build:
       context: ./requirements/mariadb
     container_name: mariadb
