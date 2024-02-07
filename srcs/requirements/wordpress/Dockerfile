@@ -3,23 +3,23 @@ FROM alpine:3.16
 # WHAT I HAVE TO DO
 # Download php-fpm
 
-RUN apk update && apk upgrade && apk add --no-cache php7.4 php7.4-fpm \
-    php7.4-mysqli \
-    php7.4-opcache \
-    php7.4-bcmath \
-    php7.4-exif \
-    php7.4-gd \
-    php7.4-curl \
-    php7.4-json \
-    php7.4-mbstring \
-    php7.4-intl \
-    php7.4-xml \
-    php7.4-zip \
-    php7.4-openssl \
-    php7.4-pear \
-    php7.4-phar \
-    php7.4-zip \
-    php7.4-zlib \
+RUN apk update && apk upgrade && apk add --no-cache php8 php8-fpm \
+    php8-mysqli \
+    php8-opcache \
+    php8-bcmath \
+    php8-exif \
+    php8-gd \
+    php8-curl \
+    php8-json \
+    php8-mbstring \
+    php8-intl \
+    php8-xml \
+    php8-zip \
+    php8-openssl \
+    php8-pear \
+    php8-phar \
+    php8-zip \
+    php8-zlib \
     mariadb-client \
     curl \
     ca-certificates \
@@ -28,12 +28,12 @@ RUN apk update && apk upgrade && apk add --no-cache php7.4 php7.4-fpm \
     bash \
     less 
 
-# Copy the www.conf file /etc/php7.4/php-fpm.d
+# Copy the www.conf file /etc/php8/php-fpm.d
 
 
 
-COPY ./conf/php-fpm.conf /etc/php7.4/php-fpm.conf
-COPY ./conf/www.conf /etc/php7.4/php-fpm.d/www.conf
+COPY ./conf/php-fpm.conf /etc/php8/php-fpm.conf
+COPY ./conf/www.conf /etc/php8/php-fpm.d/www.conf
 
 # Create the php directory to enable php-fpm to run
 
@@ -65,4 +65,4 @@ ENTRYPOINT [ "setup.sh" ]
 # COPY php.ini /usr/local/etc/php/conf.d/php.ini
 
 # Healthcheck to ensure php-fpm is running
-CMD [ "php-fpm7.4", "--nodaemonize" ]
+CMD [ "php-fpm8", "--nodaemonize" ]

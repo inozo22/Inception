@@ -54,8 +54,8 @@ if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
 	touch /var/www/html/$WP_FILE_ONINSTALL
 fi
 
-mkdir -p /var/run/php-fpm7.4
-#mkdir -p /var/run/php-fpm8
+#mkdir -p /var/run/php-fpm7
+mkdir -p /var/run/php-fpm8
 echo "[i] => Done wordpress setup!"
 
 #The script ends with exec "$@", which allows the script to execute any command-line
