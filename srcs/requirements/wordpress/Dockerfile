@@ -3,24 +3,23 @@ FROM alpine:3.16
 # WHAT I HAVE TO DO
 # Download php-fpm
 
-RUN apk update && apk upgrade 
-RUN apk add --no-cache php php-fpm \
-    php-mysqli \
-    php-opcache \
-    php-bcmath \
-    php-exif \
-    php-gd \
-    php-curl \
-    php-json \
-    php-mbstring \
-    php-intl \
-    php-xml \
-    php-zip \
-    php-openssl \
-    php-pear \
-    php-phar \
-    php-zip \
-    php-zlib \
+RUN apk update && apk upgrade && apk add --no-cache php7.4 php7.4-fpm \
+    php7.4-mysqli \
+    php7.4-opcache \
+    php7.4-bcmath \
+    php7.4-exif \
+    php7.4-gd \
+    php7.4-curl \
+    php7.4-json \
+    php7.4-mbstring \
+    php7.4-intl \
+    php7.4-xml \
+    php7.4-zip \
+    php7.4-openssl \
+    php7.4-pear \
+    php7.4-phar \
+    php7.4-zip \
+    php7.4-zlib \
     mariadb-client \
     curl \
     ca-certificates \
