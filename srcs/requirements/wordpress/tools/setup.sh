@@ -60,4 +60,6 @@ echo "[i] => Done wordpress setup!"
 
 #The script ends with exec "$@", which allows the script to execute any command-line
 # arguments provided when running the script.
+
+
 exec "$@"
