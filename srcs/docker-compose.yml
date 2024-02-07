@@ -30,8 +30,8 @@ services:
       - inception-network
     env_file:
       - .env
-    expose:
-      - 9000
+#    expose:
+ #     - 9000
     volumes:
       - ${VOLUME_WEB}:/var/www/html/
 
@@ -45,8 +45,8 @@ services:
     networks:
       - inception-network
     restart: always
-    expose:
-      - 3306
+#    expose:
+#      - 3306
     env_file:
       - .env
 
