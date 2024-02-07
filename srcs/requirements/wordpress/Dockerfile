@@ -4,7 +4,7 @@ FROM alpine:3.16
 # Download php-fpm
 
 RUN apk update && apk upgrade 
-RUN apk add --no-cache php php-fpm \
+RUN apk install -y php php-fpm \
     php-mysqli \
     php-opcache \
     php-bcmath \
