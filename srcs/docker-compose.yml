@@ -22,7 +22,6 @@ services:
     image: wordpress:nimai_incpetion
     build:
       context: ./requirements/wordpress
-#    restart: always
     container_name: wordpress
     depends_on:
       - mariadb
@@ -50,19 +49,19 @@ services:
     env_file:
       - .env
 
-#  adminer:
-#    image: adminer:nimai
-#    build:
-#      context: ./requirements/bonus/adminer
-#    container_name: adminer
-#    restart: always
-#    depends_on:
-#      - mariadb
-#      - wordpress
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - inception-network
+  adminer:
+    image: adminer:nimai
+    build:
+     context: ./requirements/bonus/adminer
+    container_name: adminer
+    restart: always
+    depends_on:
+      - mariadb
+      - wordpress
+    ports:
+      - "8080:8080"
+    networks:
+      - inception-network
 
 
 
