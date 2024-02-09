@@ -52,7 +52,7 @@ RUN chmod +x /usr/local/bin/setup.sh
 # Go to the html directory
 
 COPY ./tools/wordpress-6.2.tar.gz /tmp/
-COPY ./tools/index.html /tmp/
+#COPY ./tools/index.html /tmp/
 RUN chmod -R 777 /tmp/
 
 ENTRYPOINT [ "setup.sh" ]

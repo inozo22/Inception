@@ -1,11 +1,21 @@
 version: '3'
 
 services:
+# nginx: The name of the service.
+# image: Specifies the Docker image to use for the Nginx service.
+# container_name: Specifies the name for the container.
+# build: Specifies the build context for building the Nginx service.
+# depends_on: Specifies that the Nginx service depends on the "wordpress" service.
+# volumes: Mounts the ${VOLUME_WEB} volume to the /var/www/html directory in the Nginx container.
+# ports: Maps port 443 on the host to port 443 in the Nginx container.
+# restart: Specifies that the Nginx service should always restart. unless-stopped also fine?
+# env_file: Specifies the environment file (.env) to use for environment variables.
+# networks: Connects the Nginx service to the "inception-network" network.
   nginx:
     image: nginx:nimai_incpetion
     container_name: nginx
     build:
-      context: ./requirements/nginx #where is my docker file
+      context: ./requirements/nginx
     depends_on:
       - wordpress
     volumes:
@@ -18,6 +28,10 @@ services:
     networks:
       - inception-network
 
+# The WordPress service uses the WordPress image and builds it from the specified context.
+# Depends on the "mariadb" service.
+# Connects to the "inception-network" network.
+# Mounts the ${VOLUME_WEB} volume to the /var/www/html/ directory in the WordPress container.
   wordpress:
     image: wordpress:nimai_incpetion
     build:
@@ -29,11 +43,12 @@ services:
       - inception-network
     env_file:
       - .env
-#    expose:
- #     - 9000
     volumes:
       - ${VOLUME_WEB}:/var/www/html/
 
+# Uses the MariaDB image and builds it from the specified context.
+# Mounts the ${VOLUME_DB} volume to the /var/lib/mysql directory in the MariaDB container.
+# Connects to the "inception-network" network.
   mariadb:
     image: mariadb:nimai_incpetion
     build:
@@ -44,11 +59,14 @@ services:
     networks:
       - inception-network
     restart: always
-#    expose:
-#      - 3306
     env_file:
       - .env
 
+# Service for Adminer, a database management tool.
+# Uses the Adminer image and builds it from the specified context.
+# Depends on both "mariadb" and "wordpress" services.
+# Maps port 8080 on the host to port 8080 in the Adminer container.
+# Connects to the "inception-network" network.
   adminer:
     image: adminer:nimai
     build:
@@ -65,10 +83,19 @@ services:
 
 
 
-
+# Defines a Docker network named "inception-network" using the bridge driver.
 networks:
   inception-network:
       driver: bridge
+
+# Defines two volumes, "db" and "web," with local drivers and specific options 
+# Dockerがコンテナに関連するデータを格納するホストファイルシステム内のディレクトリと考えることができる。
+# driver: local:  ボリュームのストレージドライバを指定。この場合、"local "に設定され、
+# ボリュームデータがローカルマシンに保存されることを意味する。
+# driver_opts: Specifies additional options for the volume driver.
+# type: volume: Specifies the type of volume. In this case, it's a named volume.
+# device: ${VOLUME_DB}および device: ${VOLUME_WEB}： ホスト・マシン上のボリューム・データのソースまたは場所を指定。
+# o: bind: ボリュームをバインド伝搬モードでマウントすることを示す。これは、コンテナで行われた変更がホストでも表示されることを意味する。
 
 volumes:
   db:

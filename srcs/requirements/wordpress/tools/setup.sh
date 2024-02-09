@@ -50,7 +50,7 @@ if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
 	# update plugins
   wp plugin update --all --allow-root
 
-  mv /tmp/index.html /var/www/html/wordpress
+#  mv /tmp/index.html /var/www/html/wordpress
 	touch /var/www/html/$WP_FILE_ONINSTALL
 fi
 
