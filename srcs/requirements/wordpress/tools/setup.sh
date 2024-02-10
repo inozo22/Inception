@@ -50,11 +50,9 @@ if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
 	# update plugins
   wp plugin update --all --allow-root
 
-#  mv /tmp/index.html /var/www/html/wordpress
 	touch /var/www/html/$WP_FILE_ONINSTALL
 fi
 
-#mkdir -p /var/run/php-fpm7
 mkdir -p /var/run/php-fpm7
 echo "[i] => Done wordpress setup!"
 

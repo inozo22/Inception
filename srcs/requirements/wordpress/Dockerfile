@@ -1,8 +1,5 @@
 FROM alpine:3.16
 
-# WHAT I HAVE TO DO
-# Download php-fpm
-
 RUN apk update && apk upgrade
 RUN apk add --no-cache php8 php8-fpm \
     php8-mysqli \
@@ -29,8 +26,6 @@ RUN apk add --no-cache php8 php8-fpm \
     bash \
     less 
 
-# Copy the www.conf file /etc/php8/php-fpm.d
-
 RUN adduser -S nginx && addgroup -S nginx
 
 COPY ./conf/php-fpm.conf /etc/php8/php-fpm.conf
@@ -42,21 +37,17 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod +x wp-cli.phar 
 RUN mv wp-cli.phar /usr/local/bin/wp && chmod +x /usr/local/bin/wp
 
-
 # Copy the script and launch it
 
 COPY ./tools/setup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/setup.sh
 
-
 # Go to the html directory
 
 COPY ./tools/wordpress-6.2.tar.gz /tmp/
-#COPY ./tools/index.html /tmp/
 RUN chmod -R 777 /tmp/
 
 ENTRYPOINT [ "setup.sh" ]
-
 
 # Launch php-fpm
 
