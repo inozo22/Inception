@@ -13,7 +13,6 @@ run:
 	@docker-compose -f $(COMPOSE_FILE) up -d --build
 #	@docker-compose -f $(COMPOSE_FILE) up
 
-# Prints a message indicating that the "up" operation is done.
 	@echo "Inception is ready!"
 
 
@@ -38,7 +37,6 @@ clean:
 	@docker volume prune -f
 	@-docker system prune -f
 
-# Prints a message indicating that the "clean" operation is finished.
 	@echo "clean finished"
 
 .PHONY: all run down clean

@@ -68,7 +68,7 @@ services:
 # Maps port 8080 on the host to port 8080 in the Adminer container.
 # Connects to the "inception-network" network.
   adminer:
-    image: adminer:nimai
+    image: adminer:nimai_inception
     build:
      context: ./requirements/bonus/adminer
     container_name: adminer
