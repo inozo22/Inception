@@ -67,19 +67,19 @@ services:
 # Depends on both "mariadb" and "wordpress" services.
 # Maps port 8080 on the host to port 8080 in the Adminer container.
 # Connects to the "inception-network" network.
-  adminer:
-    image: adminer:nimai_inception
-    build:
-     context: ./requirements/bonus/adminer
-    container_name: adminer
-    restart: always
-    depends_on:
-      - mariadb
-      - wordpress
-    ports:
-      - "8080:8080"
-    networks:
-      - inception-network
+#  adminer:
+#    image: adminer:nimai_inception
+#    build:
+#     context: ./requirements/bonus/adminer
+#    container_name: adminer
+#    restart: always
+#    depends_on:
+#      - mariadb
+#      - wordpress
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - inception-network
 
 
 
