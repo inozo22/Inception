@@ -15,8 +15,11 @@ RUN chmod +x /usr/local/bin/setup.sh
 
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
+# Healthcheck to ensure MariaDB is running
+HEALTHCHECK CMD ["mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+
+
 ENTRYPOINT [ "setup.sh" ]
 
-# Healthcheck to ensure MariaDB is running
 CMD [ "/usr/bin/mysqld", "--user=mysql", "--console" ]
 RUN echo "setup.sh in mariadb executed"
