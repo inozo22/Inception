@@ -32,14 +32,32 @@ if [ ! -d /var/lib/mysql/mysql ]; then
   # MySQL クエリは一時ファイルに書き込まれます using cat。
   # これらのクエリーには、ルートユーザーの設定、権限の設定、データベースの作成、
   # WordPressデータベース用のユーザーの作成などが含まれる。
+#	cat << EOF > $tfile
+#USE mysql ;
+#FLUSH PRIVILEGES ;
+#DROP DATABASE IF EXISTS test ;
+#GRANT ALL ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
+#GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
+#SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
+#SET PASSWORD FOR 'root'@'%'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
+#FLUSH PRIVILEGES ;
+#CREATE DATABASE IF NOT EXISTS $WP_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci ;
+#CREATE USER '$WP_DB_USER'@'localhost' IDENTIFIED BY '$WP_DB_PASSWORD';
+#CREATE USER '$WP_DB_USER'@'%' IDENTIFIED BY '$WP_DB_PASSWORD';
+#GRANT ALL PRIVILEGES ON *.* TO '$WP_DB_USER'@'localhost';
+#GRANT ALL PRIVILEGES ON *.* TO '$WP_DB_USER'@'%';
+#FLUSH PRIVILEGES ;
+#EOF
 	cat << EOF > $tfile
 USE mysql ;
 FLUSH PRIVILEGES ;
 DROP DATABASE IF EXISTS test ;
-GRANT ALL ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
-GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
-SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
-SET PASSWORD FOR 'root'@'%'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
+
+CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+
 FLUSH PRIVILEGES ;
 CREATE DATABASE IF NOT EXISTS $WP_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci ;
 CREATE USER '$WP_DB_USER'@'localhost' IDENTIFIED BY '$WP_DB_PASSWORD';
