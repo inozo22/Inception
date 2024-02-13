@@ -13,8 +13,8 @@ run:
 	@docker-compose -f $(COMPOSE_FILE) up -d --build
 #	@echo "Let's see..."
 
-#	@docker-compose -f $(COMPOSE_FILE) down
-#	@docker-compose -f $(COMPOSE_FILE) up -d --build
+	@docker-compose -f $(COMPOSE_FILE) down
+	@docker-compose -f $(COMPOSE_FILE) up -d --build
 
 #	@docker-compose -f $(COMPOSE_FILE) up
 
@@ -40,7 +40,7 @@ clean:
 	@-docker rmi -f `docker images -qa`
 	@-docker volume rm `docker volume ls -q`
 	@-docker network rm `docker network ls -q`
-	@sudo rm -rf /home/nimai/data/db/mysql
+	@sudo rm -rf /home/nimai
 
 # Prunes unused Docker volumes and system resources.
 	@docker volume prune -f
