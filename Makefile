@@ -11,8 +11,8 @@ run:
 # Uses docker-compose to start the services defined in the file specified by $(COMPOSE_FILE) 
 # in detached mode (-d) and rebuild the images (--build).
 	@docker-compose -f $(COMPOSE_FILE) up -d --build
-	@docker-compose -f $(COMPOSE_FILE) down
-	@docker-compose -f $(COMPOSE_FILE) up -d --build
+#	@docker-compose -f $(COMPOSE_FILE) down
+#	@docker-compose -f $(COMPOSE_FILE) up -d --build
 
 #	@docker-compose -f $(COMPOSE_FILE) up
 
