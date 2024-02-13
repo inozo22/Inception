@@ -12,7 +12,7 @@ services:
 # env_file: Specifies the environment file (.env) to use for environment variables.
 # networks: Connects the Nginx service to the "inception-network" network.
   nginx:
-    image: nginx:nimai_incpetion
+    image: nginx:nimai
     container_name: nginx
     build:
       context: ./requirements/nginx
@@ -33,7 +33,7 @@ services:
 # Connects to the "inception-network" network.
 # Mounts the ${VOLUME_WEB} volume to the /var/www/html/ directory in the WordPress container.
   wordpress:
-    image: wordpress:nimai_incpetion
+    image: wordpress:nimai
     build:
       context: ./requirements/wordpress
     container_name: wordpress
@@ -52,7 +52,7 @@ services:
 # Mounts the ${VOLUME_DB} volume to the /var/lib/mysql directory in the MariaDB container.
 # Connects to the "inception-network" network.
   mariadb:
-    image: mariadb:nimai_incpetion
+    image: mariadb:nimai
     build:
       context: ./requirements/mariadb
     container_name: mariadb
