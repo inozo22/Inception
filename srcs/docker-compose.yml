@@ -62,7 +62,7 @@ services:
     ports:
       - "443:443"
     restart: always
-    # env_file:
+    env_file:
       - .env
     networks:
       - inception-network
