@@ -18,6 +18,10 @@ run:
 
 	@echo "Inception is ready!"
 
+up:
+	@docker-compose -f $(COMPOSE_FILE) up -d --build
+	@echo "Inception is up!"
+
 
 down:
 # Defines a target named "down". This target uses docker-compose to stop and remove the containers, 
@@ -42,5 +46,5 @@ clean:
 
 	@echo "clean finished"
 
-.PHONY: all run down clean
+.PHONY: all run up down clean
 .SILENT:
