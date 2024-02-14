@@ -8,24 +8,24 @@ run:
 	@sudo mkdir -p $(VOLUME_WEB)
 	@sudo mkdir -p $(VOLUME_DB)
 
-# Uses docker-compose to start the services defined in the file specified by $(COMPOSE_FILE) 
+# Uses docker-compose to start the services defined in the file specified by $(COMPOSE_DOCKER) 
 # in detached mode (-d) and rebuild the images (--build).
-	@docker-compose -f $(COMPOSE_FILE) up -d --build
+	@docker-compose -f $(COMPOSE_DOCKER) up -d --build
 	@echo "Inception is ready!"
 
 up:
-	@docker-compose -f $(COMPOSE_FILE) up -d --build
+	@docker-compose -f $(COMPOSE_DOCKER) up -d --build
 	@echo "Inception is up!"
 
 
 down:
 # Defines a target named "down". This target uses docker-compose to stop and remove the containers, 
-# networks, and volumes defined in the file specified by $(COMPOSE_FILE).
-	@docker-compose -f $(COMPOSE_FILE) down
+# networks, and volumes defined in the file specified by $(COMPOSE_DOCKER).
+	@docker-compose -f $(COMPOSE_DOCKER) down
 
 clean:
-# Uses docker-compose to stop and remove the containers, networks, and volumes defined in the file specified by $(COMPOSE_FILE).
-	@docker-compose -f $(COMPOSE_FILE) down
+# Uses docker-compose to stop and remove the containers, networks, and volumes defined in the file specified by $(COMPOSE_DOCKER).
+	@docker-compose -f $(COMPOSE_DOCKER) down
 
 # Removes Docker networks, containers, images, volumes, and the directory /home/nimai_incpetion.
 	@-docker network rm `docker network ls -q`
