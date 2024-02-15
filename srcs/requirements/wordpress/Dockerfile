@@ -26,6 +26,7 @@ RUN apk add --no-cache php8 php8-fpm \
     bash \
     less 
 
+# Create a user nginx and add group in nginx
 RUN adduser -S nginx && addgroup -S nginx
 
 COPY ./conf/php-fpm.conf /etc/php8/php-fpm.conf
@@ -37,24 +38,15 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod +x wp-cli.phar 
 RUN mv wp-cli.phar /usr/local/bin/wp && chmod +x /usr/local/bin/wp
 
-# Copy the script and launch it
-
+# Copy the script and give permission
 COPY ./tools/setup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/setup.sh
 
-# Go to the html directory
-
+# Copy the wordpress's tar file and give permission
 COPY ./tools/wordpress-6.2.tar.gz /tmp/
 RUN chmod -R 777 /tmp/
 
+# Launch setup.sh
 ENTRYPOINT [ "setup.sh" ]
 
-# Launch php-fpm
-
-
-
-# Any additional configurations for WordPress and php-fpm
-# COPY php.ini /usr/local/etc/php/conf.d/php.ini
-
-# Healthcheck to ensure php-fpm is running
 CMD [ "php-fpm8", "--nodaemonize" ]

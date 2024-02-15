@@ -91,13 +91,8 @@ networks:
       driver: bridge
 
 # Defines two volumes, "db" and "web," with local drivers and specific options 
-# Dockerがコンテナに関連するデータを格納するホストファイルシステム内のディレクトリと考えることができる。
-# driver: local:  ボリュームのストレージドライバを指定。この場合、"local "に設定され、
-# ボリュームデータがローカルマシンに保存されることを意味する。
 # driver_opts: Specifies additional options for the volume driver.
 # type: volume: Specifies the type of volume. In this case, it's a named volume.
-# device: ${VOLUME_DB}および device: ${VOLUME_WEB}： ホスト・マシン上のボリューム・データのソースまたは場所を指定。
-# o: bind: ボリュームをバインド伝搬モードでマウントすることを示す。これは、コンテナで行われた変更がホストでも表示されることを意味する。
 
 volumes:
   db:
