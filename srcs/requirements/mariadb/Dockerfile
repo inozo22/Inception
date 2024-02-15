@@ -27,4 +27,3 @@ ENTRYPOINT [ "setup.sh" ]
 # Defines the default command to run if no command is provided during container startup.
 # It starts the MariaDB daemon (mysql) with specific user and console options.
 CMD [ "/usr/bin/mysqld", "--user=mysql", "--console" ]
-RUN echo "setup.sh in mariadb executed"

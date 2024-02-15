@@ -11,6 +11,8 @@ chown -R mysql:mysql /run/mysqld
 # Skip if the MySQL database directory "/var/lib/mysql/mysql" exists. 
 # If not, it initializes the MySQL database, sets ownership to the mysql user, 
 # and performs initial configurations.
+# If not, it initializes the MySQL database, sets ownership to the mysql user, 
+# and performs initial configurations.
 if [ ! -d /var/lib/mysql/mysql ]; then
 	echo "[i] initial database creating..."
 	chown -R mysql:mysql /var/lib/mysql
@@ -25,6 +27,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
   while [ ! -f "$tfile" ]; do
     tfile=$(mktemp)
   done
+
 
 	cat << EOF > $tfile
 USE mysql ;
@@ -47,6 +50,7 @@ EOF
 
   # Executes MySQL queries using mysql in bootstrap mode.
 	/usr/bin/mysqld --user=mysql --bootstrap < $tfile
+  # Removes the temporary file.
   # Removes the temporary file.
   rm -f $tfile
 fi

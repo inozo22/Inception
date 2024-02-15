@@ -7,7 +7,6 @@ while ! mariadb -h$MYSQL_HOST -u$WP_DB_USER -p$WP_DB_PASSWORD $WP_DB_NAME --sile
 	echo "[i] waiting database connection..."
 	sleep 10;
 done
-echo "after waiting mariadb: Am I??"
 
 # check if wordpress is installed
 # If WordPress is already installed by looking for the presence of a file ($WP_INSTALLED). 
