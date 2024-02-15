@@ -27,7 +27,7 @@ clean:
 # Uses docker-compose to stop and remove the containers, networks, and volumes defined in the file specified by $(COMPOSE_DOCKER).
 	@docker-compose -f $(COMPOSE_DOCKER) down
 
-# Removes Docker networks, containers, images, volumes, and the directory /home/nimai_incpetion.
+# Removes Docker networks, containers, images, volumes, and the directory /home/nimai.
 	@-docker network rm `docker network ls -q`
 	@-docker rm `docker ps -qa`
 	@-docker rmi -f `docker images -qa`

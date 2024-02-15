@@ -7,14 +7,13 @@ while ! mariadb -h$MYSQL_HOST -u$WP_DB_USER -p$WP_DB_PASSWORD $WP_DB_NAME --sile
 	echo "[i] waiting database connection..."
 	sleep 10;
 done
-echo "after waiting mariadb: Am I??"
 
 # check if wordpress is installed
-# If WordPress is already installed by looking for the presence of a file ($WP_FILE_ONINSTALL). 
+# If WordPress is already installed by looking for the presence of a file ($WP_INSTALLED). 
 # If not, it proceeds to download and install WordPress using wp-cli. 
 # It then creates a configuration, installs WordPress, creates an admin user, updates plugins, and moves files around. 
 # Finally, it touches the file indicating that WordPress has been installed.
-if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
+if [ ! -f "/var/www/html/$WP_INSTALLED" ]; then
 	echo "[i] wordpress installing...[1]"
 
 	# wp-cli
@@ -50,7 +49,7 @@ if [ ! -f "/var/www/html/$WP_FILE_ONINSTALL" ]; then
 	# update plugins
   wp plugin update --all --allow-root
 
-	touch /var/www/html/$WP_FILE_ONINSTALL
+	touch /var/www/html/$WP_INSTALLED
 fi
 
 mkdir -p /var/run/php-fpm7
